@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useClubs } from '../hooks/useApi';
 import { useAuth } from '../hooks/useAuth';
 import CreateClubModal from '../components/CreateClubModal';
+import { LoadingSpinner, ErrorMessage, EmptyState, ButtonWithLoading } from '../components/LoadingComponents';
 
 const Clubs = () => {
   const { clubs, loading, error, refresh, joinClub, leaveClub } = useClubs();
@@ -95,18 +96,35 @@ const Clubs = () => {
 
   if (loading) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Clubs</h2>
-        <p>Loading clubs...</p>
+      <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: 'var(--spacing-lg)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="card-header">
+            <h1 className="page-title">🏛️ Campus Clubs</h1>
+            <p className="page-subtitle">Join clubs that match your interests and make lasting connections</p>
+          </div>
+          <LoadingSpinner 
+            text="Loading amazing clubs for you..." 
+            size="large"
+          />
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Clubs</h2>
-        <p style={{ color: '#dc2626' }}>Error loading clubs: {error}</p>
+      <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: 'var(--spacing-lg)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="card-header">
+            <h1 className="page-title">🏛️ Campus Clubs</h1>
+            <p className="page-subtitle">Join clubs that match your interests and make lasting connections</p>
+          </div>
+          <ErrorMessage 
+            error={error}
+            title="Failed to load clubs"
+            onRetry={refresh}
+          />
+        </div>
       </div>
     );
   }
@@ -363,23 +381,14 @@ const Clubs = () => {
                 </div>
                 
                 {/* 🎯 Action Button */}
-                <button 
+                <ButtonWithLoading
                   onClick={() => isMember ? handleLeaveClub(club._id || club.id, club.name) : handleJoinClub(club._id || club.id, club.name)}
-                  disabled={joiningClub === (club._id || club.id) || !user}
-                  className={isMember ? "btn-navy" : "btn-honey"}
-                  style={{ 
-                    width: '100%',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    opacity: joiningClub === (club._id || club.id) || !user ? 0.6 : 1,
-                    cursor: joiningClub === (club._id || club.id) || !user ? 'not-allowed' : 'pointer'
-                  }}
+                  loading={joiningClub === (club._id || club.id)}
+                  disabled={!user}
+                  className={`${isMember ? "btn-navy" : "btn-honey"} w-full text-base font-semibold`}
                 >
-                  {joiningClub === (club._id || club.id) ? (
-                    <span className="bee-spinner" style={{ display: 'inline-block', marginRight: '0.5rem' }}></span>
-                  ) : null}
-                  {joiningClub === (club._id || club.id) ? 'Processing...' : (isMember ? '💔 Leave Club' : '💖 Join Club')}
-                </button>
+                  {isMember ? '💔 Leave Club' : '💖 Join Club'}
+                </ButtonWithLoading>
                 
                 {!user && (
                   <p style={{ 
@@ -399,27 +408,19 @@ const Clubs = () => {
 
         {/* 📭 Empty State */}
         {filteredClubs.length === 0 && !loading && (
-          <div className="honeycomb-card" style={{ 
-            textAlign: 'center', 
-            padding: 'var(--spacing-xxl)',
-            background: 'rgba(255, 255, 255, 0.05)'
-          }}>
-            <div className="hexagon" style={{ 
-              width: '100px', 
-              height: '100px', 
-              margin: '0 auto var(--spacing-lg)',
-              background: 'var(--clubbee-gold-primary)',
-              fontSize: '2rem'
-            }}>
-              🔍
-            </div>
-            <h3 className="clubbee-text-gold" style={{ marginBottom: 'var(--spacing-md)' }}>
-              No clubs found
-            </h3>
-            <p style={{ color: 'var(--clubbee-gold-light)' }}>
-              {searchTerm || selectedCategory ? 'Try adjusting your filters to discover amazing clubs! 🐝' : 'Be the pioneer and create the first club! ✨'}
-            </p>
-          </div>
+          <EmptyState
+            icon="🏛️"
+            title="No clubs found"
+            description={searchTerm || selectedCategory ? 'Try adjusting your filters to discover amazing clubs! 🐝' : 'Be the pioneer and create the first club! ✨'}
+            actionButton={
+              <button
+                onClick={() => setShowCreateModal(true)}
+                className="btn-honey px-6 py-2 text-sm font-medium"
+              >
+                🌟 Create New Club
+              </button>
+            }
+          />
         )}
 
         {/* 🎭 Create Club Modal */}

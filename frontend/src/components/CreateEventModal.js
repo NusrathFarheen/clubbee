@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useEvents } from '../hooks/useApi';
 import ImageUpload from '../components/ImageUpload';
-import { eventsService } from '../services/firebaseService';
 
 const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
   const { user } = useAuth();
+  const { addEvent } = useEvents();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -43,14 +44,14 @@ const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
       console.log('Creating event with data:', eventData);
       console.log('Event image URL:', eventData.imageUrl);
       
-      // Use Firestore directly instead of backend
-      const newEvent = await eventsService.createEvent({
+      // Use the Firebase-enabled addEvent function
+      const newEvent = await addEvent({
         ...eventData,
         organizerId: { name: user?.displayName || 'Demo User' },
         attendees: []
       });
       
-      console.log('Event created successfully in Firestore:', newEvent);
+      console.log('Event created successfully:', newEvent);
       
       // Call the callback to update the events list
       onEventCreated(newEvent);
