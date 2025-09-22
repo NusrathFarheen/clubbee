@@ -8,10 +8,8 @@ import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import CreateClub from './pages/CreateClub';
 import FirebaseTest from './pages/FirebaseTest';
-import AdminPanel from './pages/AdminPanel';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import './App.css';
-import './test-firebase'; // Import Firebase test for console access
 
 function App() {
   return (
@@ -195,29 +193,6 @@ function AppContent() {
                 👤 Profile
               </Link>
               <Link 
-                to="/admin" 
-                className="nav-link"
-                style={{ 
-                  color: 'var(--clubbee-gold-primary)', 
-                  textDecoration: 'none',
-                  padding: '0.5rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  transition: 'var(--transition-normal)',
-                  fontWeight: '600',
-                  border: '1px solid var(--clubbee-gold-primary)'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = 'var(--clubbee-gold-primary)';
-                  e.target.style.color = 'var(--clubbee-navy-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'transparent';
-                  e.target.style.color = 'var(--clubbee-gold-primary)';
-                }}
-              >
-                ⚙️ Admin
-              </Link>
-              <Link 
                 to="/firebase-test" 
                 className="nav-link"
                 style={{ 
@@ -309,11 +284,6 @@ function AppContent() {
           <Route path="/create-club" element={
             <ProtectedRoute>
               <CreateClub />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin" element={
-            <ProtectedRoute>
-              <AdminPanel />
             </ProtectedRoute>
           } />
           <Route path="/firebase-test" element={

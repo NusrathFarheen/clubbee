@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { useClubs } from '../hooks/useApi';
-import { ProtectedRoute, usePermissions } from './ProtectedRoutes';
-import { PERMISSIONS } from '../utils/roleManager';
 
 const CreateClubForm = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { addClub } = useClubs();
-  const { hasPermission } = usePermissions();
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -37,19 +32,20 @@ const CreateClubForm = () => {
         throw new Error('You must be logged in to create a club');
       }
       
-      if (!hasPermission(PERMISSIONS.CREATE_CLUB)) {
-        throw new Error('You do not have permission to create clubs');
+      const token = await user.getIdToken();
+      const response = await fetch('/api/clubs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Failed to create club');
       }
-      
-      // Use the Firebase-enabled addClub function
-      const clubData = {
-        ...formData,
-        createdBy: user.uid,
-        createdByName: user.displayName || user.email,
-        admins: [user.uid] // Creator becomes first admin
-      };
-      
-      await addClub(clubData);
       
       setSuccess(true);
       // Reset form after successful submission

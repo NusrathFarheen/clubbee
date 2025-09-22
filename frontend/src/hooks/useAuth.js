@@ -5,9 +5,7 @@ import {
   signOut, 
   onAuthStateChanged 
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { auth, db } from '../firebase';
-import { USER_ROLES } from '../utils/roleManager';
+import { auth } from '../firebase';
 
 // Create Auth Context
 const AuthContext = createContext(null);
@@ -18,61 +16,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Fetch user profile data from Firestore
-  const fetchUserProfile = async (firebaseUser) => {
-    try {
-      const userDocRef = doc(db, 'users', firebaseUser.uid);
-      const userDoc = await getDoc(userDocRef);
-      
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        return {
-          ...firebaseUser,
-          role: userData.role || USER_ROLES.MEMBER,
-          clubAdminRoles: userData.clubAdminRoles || [],
-          createdClubs: userData.createdClubs || [],
-          preferences: userData.preferences || {}
-        };
-      } else {
-        // Create new user document with default role
-        const newUserData = {
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          photoURL: firebaseUser.photoURL,
-          role: USER_ROLES.MEMBER,
-          clubAdminRoles: [],
-          createdClubs: [],
-          createdAt: serverTimestamp(),
-          lastLoginAt: serverTimestamp()
-        };
-        
-        await setDoc(userDocRef, newUserData);
-        
-        return {
-          ...firebaseUser,
-          ...newUserData
-        };
-      }
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-      return {
-        ...firebaseUser,
-        role: USER_ROLES.MEMBER,
-        clubAdminRoles: [],
-        createdClubs: []
-      };
-    }
-  };
-  
   // Listen for auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        const userWithProfile = await fetchUserProfile(currentUser);
-        setUser(userWithProfile);
-      } else {
-        setUser(null);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     }, (error) => {
       setError(error.message);

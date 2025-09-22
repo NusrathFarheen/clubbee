@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { useNews } from '../hooks/useApi';
 import { useAuth } from '../hooks/useAuth';
 import ImageUpload from '../components/ImageUpload';
-import { LoadingSpinner, ErrorMessage, EmptyState, ButtonWithLoading } from '../components/LoadingComponents';
-import { ConditionalRender, usePermissions } from '../components/ProtectedRoutes';
-import { PERMISSIONS } from '../utils/roleManager';
 
 const News = () => {
   const { news, loading, error, addNews } = useNews();
   const { user } = useAuth();
-  const { hasPermission } = usePermissions();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newArticle, setNewArticle] = useState({
     title: '',
@@ -37,14 +33,52 @@ const News = () => {
     return (
       <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: '2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div className="card-header">
-            <h1 className="page-title">📰 News & Announcements</h1>
-            <p className="page-subtitle">Stay updated with the latest campus news 📢</p>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: 'var(--spacing-xl)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            padding: 'var(--spacing-lg)',
+            borderRadius: 'var(--radius-lg)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(244, 196, 48, 0.2)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img 
+                src="/clubbee-logo.jpg" 
+                alt="CLUBBEE Logo"
+                style={{ 
+                  width: '60px', 
+                  height: '60px', 
+                  borderRadius: '12px',
+                  objectFit: 'cover',
+                  border: '3px solid var(--clubbee-gold-primary)',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              />
+              <div>
+                <h2 className="clubbee-text-gold" style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: 0,
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                }}>
+                  📰 News & Announcements
+                </h2>
+                <p style={{ 
+                  color: 'var(--clubbee-gold-light)', 
+                  margin: '0.5rem 0 0 0',
+                  fontSize: '1.1rem'
+                }}>
+                  Stay updated with the latest campus news 📢
+                </p>
+              </div>
+            </div>
           </div>
-          <LoadingSpinner 
-            text="Loading latest updates..." 
-            size="large"
-          />
+          <div style={{ textAlign: 'center' }}>
+            <div className="loading-spinner">Loading latest updates...</div>
+          </div>
         </div>
       </div>
     );
@@ -54,14 +88,54 @@ const News = () => {
     return (
       <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: '2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div className="card-header">
-            <h1 className="page-title">📰 News & Announcements</h1>
-            <p className="page-subtitle">Stay updated with the latest campus news 📢</p>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: 'var(--spacing-xl)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            padding: 'var(--spacing-lg)',
+            borderRadius: 'var(--radius-lg)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(244, 196, 48, 0.2)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img 
+                src="/clubbee-logo.jpg" 
+                alt="CLUBBEE Logo"
+                style={{ 
+                  width: '60px', 
+                  height: '60px', 
+                  borderRadius: '12px',
+                  objectFit: 'cover',
+                  border: '3px solid var(--clubbee-gold-primary)',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              />
+              <div>
+                <h2 className="clubbee-text-gold" style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: 0,
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                }}>
+                  📰 News & Announcements
+                </h2>
+                <p style={{ 
+                  color: 'var(--clubbee-gold-light)', 
+                  margin: '0.5rem 0 0 0',
+                  fontSize: '1.1rem'
+                }}>
+                  Stay updated with the latest campus news 📢
+                </p>
+              </div>
+            </div>
           </div>
-          <ErrorMessage 
-            error={error}
-            title="Failed to load news"
-          />
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ color: '#dc2626', padding: '2rem', background: 'white', borderRadius: '12px', border: '2px solid #dc2626' }}>
+              Error loading news: {error}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -131,23 +205,21 @@ const News = () => {
               </p>
             </div>
           </div>
-          <ConditionalRender permission={PERMISSIONS.CREATE_NEWS}>
-            <button 
-              className="btn-honey pulse-honey"
-              onClick={() => setShowCreateForm(!showCreateForm)}
-              style={{ 
-                fontSize: '1rem',
-                padding: 'var(--spacing-md) var(--spacing-xl)',
-                fontWeight: '600'
-              }}
-            >
-              {showCreateForm ? 'Cancel' : '+ Post News'}
-            </button>
-          </ConditionalRender>
+          <button 
+            className="btn-honey pulse-honey"
+            onClick={() => setShowCreateForm(!showCreateForm)}
+            style={{ 
+              fontSize: '1rem',
+              padding: 'var(--spacing-md) var(--spacing-xl)',
+              fontWeight: '600'
+            }}
+          >
+            {showCreateForm ? 'Cancel' : '+ Post News'}
+          </button>
         </div>
 
         {/* Create Form */}
-        {showCreateForm && hasPermission(PERMISSIONS.CREATE_NEWS) && (
+        {showCreateForm && (
           <div className="club-card" style={{ 
             marginBottom: '2rem', 
             padding: '2rem',
@@ -313,23 +385,6 @@ const News = () => {
                 </button>
               </div>
             </form>
-          </div>
-        )}
-
-        {/* Role-based notification for non-admins */}
-        {!hasPermission(PERMISSIONS.CREATE_NEWS) && (
-          <div style={{
-            background: 'linear-gradient(135deg, var(--clubbee-navy-primary), var(--clubbee-blue-primary))',
-            color: 'white',
-            padding: 'var(--spacing-lg)',
-            borderRadius: 'var(--radius-lg)',
-            marginBottom: '2rem',
-            textAlign: 'center'
-          }}>
-            <h3 style={{ margin: '0 0 0.5rem 0' }}>🔒 News Publishing</h3>
-            <p style={{ margin: 0, opacity: 0.9 }}>
-              Only administrators can publish news articles. Contact a club admin to share announcements.
-            </p>
           </div>
         )}
 

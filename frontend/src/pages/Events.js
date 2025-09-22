@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useEvents } from '../hooks/useApi';
 import RSVPButton from '../components/RSVPButton';
 import CreateEventModal from '../components/CreateEventModal';
-import { LoadingSpinner, ErrorMessage, EmptyState } from '../components/LoadingComponents';
 
 const Events = () => {
   // Using the refresh function by passing it to child components
@@ -25,14 +24,52 @@ const Events = () => {
     return (
       <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: '2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div className="card-header">
-            <h1 className="page-title">📅 Campus Events</h1>
-            <p className="page-subtitle">Discover and participate in exciting events 🎉</p>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: 'var(--spacing-xl)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            padding: 'var(--spacing-lg)',
+            borderRadius: 'var(--radius-lg)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(244, 196, 48, 0.2)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img 
+                src="/clubbee-logo.jpg" 
+                alt="CLUBBEE Logo"
+                style={{ 
+                  width: '60px', 
+                  height: '60px', 
+                  borderRadius: '12px',
+                  objectFit: 'cover',
+                  border: '3px solid var(--clubbee-gold-primary)',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              />
+              <div>
+                <h2 className="clubbee-text-gold" style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: 0,
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                }}>
+                  📅 Campus Events
+                </h2>
+                <p style={{ 
+                  color: 'var(--clubbee-gold-light)', 
+                  margin: '0.5rem 0 0 0',
+                  fontSize: '1.1rem'
+                }}>
+                  Discover and participate in exciting events 🎉
+                </p>
+              </div>
+            </div>
           </div>
-          <LoadingSpinner 
-            text="Loading exciting events for you..." 
-            size="large"
-          />
+          <div style={{ textAlign: 'center' }}>
+            <div className="loading-spinner">Loading events...</div>
+          </div>
         </div>
       </div>
     );

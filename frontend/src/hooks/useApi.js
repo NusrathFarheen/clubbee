@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { eventsService, clubsService, newsService } from '../services/firebaseService';
-import apiService from '../services/apiService';
 
 // Custom hook for fetching clubs
 export const useClubs = () => {
@@ -55,7 +54,7 @@ export const useClubs = () => {
   const addClub = async (newClub) => {
     console.log('Adding new club:', newClub);
     try {
-      // Save to Firebase Firestore for real-time data
+      // Try to save to Firestore
       const savedClub = await clubsService.createClub(newClub);
       console.log('Club saved to Firestore:', savedClub);
       
@@ -71,7 +70,7 @@ export const useClubs = () => {
   const joinClub = async (clubId, userId, userDisplayName) => {
     console.log('Joining club:', { clubId, userId, userDisplayName });
     try {
-      // Use Firebase Firestore for real-time updates
+      // Try Firestore first
       const updatedClub = await clubsService.joinClub(clubId, userId, userDisplayName);
       console.log('Firestore join successful:', updatedClub);
       
@@ -86,8 +85,8 @@ export const useClubs = () => {
         return newClubs;
       });
       return updatedClub;
-    } catch (error) {
-      console.log('Firestore join failed, using local state:', error);
+    } catch (firestoreError) {
+      console.log('Firestore join failed, using local state:', firestoreError);
       
       // Fallback to local state update for demo data
       const newMember = {
@@ -179,8 +178,8 @@ export const useClubs = () => {
       setError(null);
       
       try {
-        console.log('Fetching clubs from Firebase Firestore...');
-        // Use Firebase Firestore as primary data source
+        console.log('Fetching clubs from Firestore...');
+        // Try Firestore first
         const firestoreClubs = await clubsService.getAllClubs();
         console.log('Firestore clubs:', firestoreClubs);
         const clubsWithMemberships = loadMemberships(firestoreClubs);
@@ -190,13 +189,15 @@ export const useClubs = () => {
         console.error('Firestore clubs fetch failed:', firestoreError);
         
         try {
-          console.log('Trying backend API as fallback...');
-          // Try backend API as fallback
-          const backendClubs = await apiService.clubs.getClubs();
-          console.log('Backend clubs:', backendClubs);
-          const clubsWithMemberships = loadMemberships(backendClubs);
-          setClubs(clubsWithMemberships);
-          return;
+          console.log('Trying backend API...');
+          // Try backend API as second option
+          const response = await fetch('http://localhost:3001/api/clubs');
+          if (response.ok) {
+            const backendClubs = await response.json();
+            console.log('Backend clubs:', backendClubs);
+            setClubs(backendClubs);
+            return;
+          }
         } catch (backendError) {
           console.error('Backend clubs fetch failed:', backendError);
         }
@@ -288,7 +289,7 @@ export const useEvents = () => {
   const addEvent = async (newEvent) => {
     console.log('Adding new event:', newEvent);
     try {
-      // Save to Firebase Firestore for real-time data
+      // Try to save to Firestore first
       const savedEvent = await eventsService.createEvent(newEvent);
       console.log('Event saved to Firestore:', savedEvent);
       
@@ -299,8 +300,18 @@ export const useEvents = () => {
       });
       return savedEvent;
     } catch (error) {
-      console.error('Failed to save to Firestore:', error);
-      throw error;
+      console.error('Failed to save to Firestore, using local storage:', error);
+      
+      // Fallback to localStorage
+      const localEvent = { ...newEvent, _id: 'local-' + Date.now() };
+      const storedEvents = loadStoredEvents();
+      const updatedEvents = [localEvent, ...storedEvents];
+      localStorage.setItem('userCreatedEvents', JSON.stringify(updatedEvents));
+      setEvents(prevEvents => {
+        const validPrevEvents = prevEvents.filter(event => event && (event._id || event.id));
+        return [localEvent, ...validPrevEvents];
+      });
+      return localEvent;
     }
   };
 
@@ -325,8 +336,8 @@ export const useEvents = () => {
       setError(null);
       
       try {
-        console.log('Fetching events from Firebase Firestore...');
-        // Use Firebase Firestore as primary data source
+        console.log('Fetching events from Firestore...');
+        // Try Firestore first
         const firestoreEvents = await eventsService.getAllEvents();
         console.log('Firestore events:', firestoreEvents);
         const eventsWithRSVPs = loadRSVPs(firestoreEvents);
@@ -335,19 +346,6 @@ export const useEvents = () => {
         
       } catch (firestoreError) {
         console.error('Firestore fetch failed:', firestoreError);
-        
-        try {
-          console.log('Trying backend API as fallback...');
-          // Try backend API as fallback
-          const backendEvents = await apiService.events.getEvents();
-          console.log('Backend events:', backendEvents);
-          const eventsWithRSVPs = loadRSVPs(backendEvents);
-          const validEvents = eventsWithRSVPs.filter(event => event && (event._id || event.id));
-          setEvents(validEvents);
-          return;
-        } catch (backendError) {
-          console.error('Backend fetch failed:', backendError);
-        }
         
         // Fallback to localStorage + backend + demo data
         const storedEvents = loadStoredEvents();
@@ -595,7 +593,7 @@ export const useNews = () => {
   const addNews = async (newArticle) => {
     console.log('Adding new news article:', newArticle);
     try {
-      // Save to Firebase Firestore for real-time data
+      // Try to save to Firestore
       const savedArticle = await newsService.createNews(newArticle);
       console.log('News saved to Firestore:', savedArticle);
       
@@ -614,25 +612,14 @@ export const useNews = () => {
       setError(null);
       
       try {
-        console.log('Fetching news from Firebase Firestore...');
-        // Use Firebase Firestore as primary data source
+        console.log('Fetching news from Firestore...');
+        // Try Firestore first
         const firestoreNews = await newsService.getAllNews();
         console.log('Firestore news:', firestoreNews);
         setNews(firestoreNews);
         
       } catch (firestoreError) {
         console.error('Firestore news fetch failed:', firestoreError);
-        
-        try {
-          console.log('Trying backend API as fallback...');
-          // Try backend API as fallback
-          const backendNews = await apiService.news.getNews();
-          console.log('Backend news:', backendNews);
-          setNews(backendNews);
-          return;
-        } catch (backendError) {
-          console.error('Backend news fetch failed:', backendError);
-        }
         
         // Fallback to demo data
         const demoNews = [
