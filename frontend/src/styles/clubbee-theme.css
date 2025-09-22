@@ -1,31 +1,58 @@
-/* 🐝 CLUBBEE Design System - Connect.Unite.Elevate ✨ */
+/* 🐝 CLUBBEE Professional Deep Blue-Black & Gold System - Connect.Unite.Elevate ✨ */
 
 :root {
-  /* 🍯 Golden Honey Colors */
-  --clubbee-gold-primary: #F4C430;
-  --clubbee-gold-bright: #FFD700;
-  --clubbee-gold-dark: #B8860B;
-  --clubbee-gold-light: #FFF8DC;
-  --clubbee-gold-accent: #FFEB3B;
+  /* � Professional Brand Color Palette */
+  --brand-navy-primary: #121A28;
+  --brand-navy-light: #1A2332;
+  --brand-navy-dark: #0A0F18;
+  --brand-navy-accent: #1F2937;
   
-  /* 🌙 Navy Dark Colors */
-  --clubbee-navy-primary: #2C3E50;
-  --clubbee-navy-light: #34495E;
-  --clubbee-navy-dark: #1A252F;
-  --clubbee-navy-accent: #445566;
+  --brand-gold-primary: #C7A046;
+  --brand-gold-light: #D4AF37;
+  --brand-gold-dark: #A8863A;
+  --brand-gold-accent: #B8963F;
   
-  /* ☁️ Light & Neutral Colors */
-  --clubbee-cream: #FFFACD;
-  --clubbee-white: #FFFFFF;
-  --clubbee-light-gray: #F8F9FA;
-  --clubbee-medium-gray: #6C757D;
-  --clubbee-dark-gray: #495057;
+  --brand-cream-primary: #F0F2F5;
+  --brand-cream-light: #F8F9FA;
+  --brand-cream-dark: #E9ECEF;
   
-  /* 🎨 Accent Colors */
-  --clubbee-success: #28A745;
-  --clubbee-warning: #FFC107;
-  --clubbee-danger: #DC3545;
-  --clubbee-info: #17A2B8;
+  --brand-text-primary: #A0A0A0;
+  --brand-text-secondary: #8A8A8A;
+  --brand-text-muted: #707070;
+  --brand-white: #FFFFFF;
+  
+  /* Legacy color mappings for compatibility */
+  --clubbee-navy-primary: var(--brand-navy-primary);
+  --clubbee-navy-light: var(--brand-navy-light);
+  --clubbee-navy-dark: var(--brand-navy-dark);
+  --clubbee-navy-accent: var(--brand-navy-accent);
+  --clubbee-gold-primary: var(--brand-gold-primary);
+  --clubbee-gold-bright: var(--brand-gold-light);
+  --clubbee-gold-dark: var(--brand-gold-dark);
+  --clubbee-gold-light: var(--brand-cream-primary);
+  --clubbee-cream: var(--brand-cream-primary);
+  --clubbee-off-white: var(--brand-cream-light);
+  --clubbee-white: var(--brand-white);
+  
+  /* 🎨 Enhanced Accent Colors */
+  --brand-success: #2E7D4A;
+  --brand-warning: #E68900;
+  --brand-danger: #C53030;
+  --brand-info: var(--brand-navy-light);
+  --clubbee-blue-primary: var(--brand-navy-primary);
+  --clubbee-blue-light: #E8EAF6;
+  --clubbee-blue-bright: var(--brand-navy-light);
+  --clubbee-orange-primary: var(--brand-warning);
+  --clubbee-orange-light: #FED7AA;
+  --clubbee-green-primary: var(--brand-success);
+  --clubbee-green-light: #C6F6D5;
+  --clubbee-success: var(--brand-success);
+  --clubbee-warning: var(--brand-warning);
+  --clubbee-danger: var(--brand-danger);
+  --clubbee-info: var(--brand-info);
+  --clubbee-light-gray: var(--brand-cream-primary);
+  --clubbee-medium-gray: var(--brand-text-secondary);
+  --clubbee-dark-gray: var(--brand-text-primary);
   
   /* 📏 Spacing System */
   --spacing-xs: 0.25rem;
@@ -36,9 +63,9 @@
   --spacing-xxl: 3rem;
   
   /* 🔤 Typography */
-  --font-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-heading: 'Poppins', 'Inter', sans-serif;
-  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Fira Code', 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
   
   /* 📐 Border Radius */
   --radius-sm: 4px;
@@ -81,13 +108,57 @@ body {
   line-height: 1.6;
 }
 
-/* 🍯 Honeycomb Background Pattern */
+/* 🍯 Professional Brand Background Pattern */
 .honeycomb-bg {
+  background: linear-gradient(135deg, var(--brand-navy-primary) 0%, var(--brand-navy-accent) 50%, var(--brand-navy-light) 100%);
+  position: relative;
+}
+
+.honeycomb-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(244, 196, 48, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 30px;
+    /* Subtle hexagon pattern with brand gold */
+    linear-gradient(120deg, transparent 25%, rgba(199, 160, 70, 0.015) 25%, rgba(199, 160, 70, 0.015) 28%, transparent 28%),
+    linear-gradient(60deg, transparent 25%, rgba(199, 160, 70, 0.015) 25%, rgba(199, 160, 70, 0.015) 28%, transparent 28%),
+    linear-gradient(0deg, transparent 25%, rgba(199, 160, 70, 0.015) 25%, rgba(199, 160, 70, 0.015) 28%, transparent 28%);
+  background-size: 120px 104px;
+  background-position: 0 0, 60px 52px, 0 0;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.honeycomb-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced watermark hexagon pattern */
+.honeycomb-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    /* Refined hexagonal cells */
+    conic-gradient(from 30deg at 50% 50%, 
+      transparent 0deg, 
+      rgba(199, 160, 70, 0.01) 60deg, 
+      transparent 120deg, 
+      rgba(199, 160, 70, 0.01) 180deg, 
+      transparent 240deg, 
+      rgba(199, 160, 70, 0.01) 300deg, 
+      transparent 360deg);
+  background-size: 100px 86px;
+  background-position: 50px 43px;
+  z-index: 0;
+  opacity: 0.2;
 }
 
 /* 🐝 CLUBBEE Brand Components */
@@ -120,15 +191,17 @@ body {
 
 /* Honeycomb Card */
 .honeycomb-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   border: 2px solid var(--clubbee-gold-primary);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   margin: var(--spacing-md);
   position: relative;
   overflow: hidden;
-  transition: var(--transition-normal);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   color: var(--clubbee-navy-primary);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .honeycomb-card::before {
@@ -142,32 +215,58 @@ body {
   z-index: -1;
   border-radius: var(--radius-lg);
   opacity: 0;
-  transition: var(--transition-normal);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.honeycomb-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .honeycomb-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-honey);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(244, 196, 48, 0.3), 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .honeycomb-card:hover::before {
   opacity: 1;
 }
 
-/* Golden Button */
+.honeycomb-card:hover::after {
+  left: 100%;
+}
+
+/* Professional Brand Button */
 .btn-honey {
-  background: linear-gradient(45deg, var(--clubbee-gold-primary), var(--clubbee-gold-bright));
-  color: var(--clubbee-navy-primary);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--brand-gold-primary), var(--brand-gold-light));
+  color: var(--brand-navy-primary);
+  border: 1px solid var(--brand-gold-primary);
+  padding: var(--spacing-sm) var(--spacing-xl);
   border-radius: var(--radius-md);
+  font-family: var(--font-heading);
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 2px 4px rgba(199, 160, 70, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.025em;
 }
 
 .btn-honey::before {
@@ -177,17 +276,50 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: var(--transition-fast);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-honey::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--brand-gold-light), var(--brand-gold-accent), var(--brand-gold-primary));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .btn-honey:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-honey);
+  box-shadow: 
+    0 8px 16px rgba(199, 160, 70, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  color: var(--brand-navy-primary);
+  border-color: var(--brand-gold-light);
 }
 
 .btn-honey:hover::before {
   left: 100%;
+}
+
+.btn-honey:hover::after {
+  opacity: 1;
+}
+
+.btn-honey:active {
+  transform: translateY(-1px);
+}
+
+.btn-honey:focus {
+  outline: none;
+  box-shadow: 
+    0 8px 16px rgba(199, 160, 70, 0.3),
+    0 0 0 3px rgba(199, 160, 70, 0.3);
 }
 
 .btn-honey:active {
@@ -327,19 +459,65 @@ body {
   }
 }
 
-/* Loading Spinner with Bee Theme */
-.bee-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--clubbee-gold-light);
-  border-top: 4px solid var(--clubbee-gold-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+/* Loading Spinner with Professional Bee Theme */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--clubbee-navy-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.bee-spinner {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.bee-spinner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 4px solid transparent;
+  border-top: 4px solid var(--clubbee-gold-primary);
+  border-right: 4px solid var(--clubbee-gold-bright);
+  border-radius: 50%;
+  animation: professional-spin 1.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+}
+
+.bee-spinner::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 3px solid transparent;
+  border-bottom: 3px solid var(--clubbee-orange-primary);
+  border-left: 3px solid var(--clubbee-gold-primary);
+  border-radius: 50%;
+  animation: professional-spin 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite reverse;
+}
+
+@keyframes professional-spin {
+  0% { 
+    transform: rotate(0deg);
+    box-shadow: 0 0 0 rgba(244, 196, 48, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(244, 196, 48, 0.4);
+  }
+  100% { 
+    transform: rotate(360deg);
+    box-shadow: 0 0 0 rgba(244, 196, 48, 0.2);
+  }
 }
 
 /* Success/Error Messages with Theme */
@@ -470,4 +648,467 @@ body {
 .fab-honey:hover {
   transform: scale(1.1);
   box-shadow: 0 12px 35px rgba(244, 196, 48, 0.6);
+}
+
+/* Enhanced Club Card with Professional Brand Theme */
+.club-card {
+  background: var(--brand-cream-primary);
+  border: 1px solid rgba(199, 160, 70, 0.15);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(199, 160, 70, 0.1);
+}
+
+.club-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--brand-gold-primary), 
+    var(--brand-gold-light), 
+    var(--brand-gold-accent),
+    var(--brand-gold-light),
+    var(--brand-gold-primary)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.club-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.club-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(199, 160, 70, 0.25);
+  border-color: rgba(199, 160, 70, 0.3);
+}
+
+.club-card:hover::before {
+  opacity: 1;
+}
+
+.club-card:hover::after {
+  left: 100%;
+}
+
+/* Enhanced Event Card */
+.event-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--clubbee-blue-primary);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.12),
+    0 3px 15px rgba(37, 99, 235, 0.3);
+  border-color: var(--clubbee-blue-bright);
+}
+
+/* Badge with Honeycomb Styling */
+.badge-honey {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: default;
+}
+
+.badge-honey::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--clubbee-gold-bright), var(--clubbee-orange-primary), var(--clubbee-gold-primary));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.badge-honey:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.badge-honey:hover::before {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🔤 Professional Typography System */
+.heading-hero {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--clubbee-gold-primary), var(--clubbee-gold-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-md);
+}
+
+.heading-xl {
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--clubbee-navy-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.heading-lg {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--clubbee-navy-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.heading-md {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--clubbee-navy-primary);
+}
+
+.subheading {
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--clubbee-medium-gray);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.body-text {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--clubbee-dark-gray);
+}
+
+.text-muted {
+  color: var(--clubbee-medium-gray);
+  font-size: 0.875rem;
+}
+
+/* 🎴 Professional Brand Card System */
+.card-professional {
+  background: var(--brand-cream-primary);
+  border: 1px solid rgba(199, 160, 70, 0.15);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-professional::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-gold-primary), var(--brand-gold-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-professional:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(199, 160, 70, 0.2);
+}
+
+.card-professional:hover::before {
+  opacity: 1;
+}
+
+.card-floating {
+  background: var(--brand-cream-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(199, 160, 70, 0.1);
+}
+
+.card-floating:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(199, 160, 70, 0.25);
+}
+
+/* 🎨 PROFESSIONAL BRAND COMPONENTS */
+
+/* 1. Body and Main Container */
+body {
+  font-family: var(--font-primary);
+  background-color: var(--brand-navy-primary);
+  color: var(--brand-text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.main-container {
+  min-height: 100vh;
+  background: var(--brand-navy-primary);
+  position: relative;
+}
+
+/* 2. Navigation Bar */
+.navbar {
+  background: var(--brand-navy-primary);
+  border-bottom: 1px solid rgba(199, 160, 70, 0.2);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.nav-link {
+  color: var(--brand-cream-primary);
+  text-decoration: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover {
+  color: var(--brand-gold-primary);
+  background: rgba(199, 160, 70, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  color: var(--brand-gold-primary);
+  background: rgba(199, 160, 70, 0.15);
+  font-weight: 600;
+}
+
+/* 3. Header Banner */
+.header-banner {
+  background: linear-gradient(135deg, var(--brand-cream-primary) 0%, var(--brand-cream-light) 100%);
+  border: 1px solid rgba(199, 160, 70, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xxl);
+  margin: var(--spacing-xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(199, 160, 70, 0.1);
+}
+
+.header-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-gold-primary), var(--brand-gold-light), var(--brand-gold-primary));
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.header-banner h1 {
+  color: var(--brand-navy-primary);
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--brand-gold-primary), var(--brand-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-banner .subheading {
+  color: var(--brand-gold-primary);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: var(--spacing-md) 0;
+}
+
+.header-banner p {
+  color: var(--brand-navy-primary);
+  font-size: 1.125rem;
+  margin: var(--spacing-lg) 0 0 0;
+}
+
+/* 4. Professional Card System */
+.card {
+  background: var(--brand-cream-primary);
+  border: 1px solid rgba(199, 160, 70, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-md);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--brand-gold-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(199, 160, 70, 0.2);
+  border-color: rgba(199, 160, 70, 0.3);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card h3 {
+  color: var(--brand-navy-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.card p {
+  color: var(--brand-navy-primary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--brand-gold-primary), var(--brand-gold-light));
+  color: var(--brand-cream-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto var(--spacing-md) auto;
+  box-shadow: 0 4px 12px rgba(199, 160, 70, 0.25);
+}
+
+/* 5. Typography System */
+h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--brand-cream-primary);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--brand-cream-primary);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+p {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--brand-text-primary);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+/* Professional Utilities */
+.text-brand-gold {
+  color: var(--brand-gold-primary);
+}
+
+.text-brand-navy {
+  color: var(--brand-navy-primary);
+}
+
+.bg-brand-cream {
+  background-color: var(--brand-cream-primary);
+}
+
+.bg-brand-navy {
+  background-color: var(--brand-navy-primary);
 }

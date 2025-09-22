@@ -32,24 +32,24 @@ const Dashboard = () => {
     <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: 'var(--spacing-lg)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         
-        {/* 🐝 Hero Section */}
-        <div className="honeycomb-card" style={{ 
+        {/* 🐝 Professional Hero Section */}
+        <div className="card-professional" style={{ 
           textAlign: 'center', 
-          marginBottom: 'var(--spacing-xl)',
-          background: 'linear-gradient(135deg, rgba(244, 196, 48, 0.1), rgba(255, 215, 0, 0.05))',
-          border: '2px solid var(--clubbee-gold-primary)',
+          marginBottom: 'var(--spacing-xxl)',
+          padding: 'var(--spacing-xxl)',
+          background: 'linear-gradient(135deg, var(--clubbee-off-white) 0%, var(--clubbee-cream) 100%)',
           position: 'relative',
           overflow: 'hidden'
         }}>
-          {/* Background Pattern */}
+          {/* Subtle background accent */}
           <div style={{
             position: 'absolute',
             top: '-50px',
             right: '-50px',
-            width: '200px',
-            height: '200px',
-            background: 'var(--clubbee-gold-primary)',
-            opacity: 0.1,
+            width: '150px',
+            height: '150px',
+            background: 'linear-gradient(45deg, var(--clubbee-gold-primary), var(--clubbee-gold-bright))',
+            opacity: 0.08,
             clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
             transform: 'rotate(15deg)'
           }} />
@@ -65,76 +65,77 @@ const Dashboard = () => {
               src="/clubbee-logo.jpg" 
               alt="CLUBBEE Logo"
               style={{ 
-                width: '120px', 
-                height: '120px', 
-                borderRadius: '16px',
+                width: '100px', 
+                height: '100px', 
+                borderRadius: 'var(--radius-lg)',
                 objectFit: 'cover',
-                border: '4px solid var(--clubbee-gold-primary)',
-                boxShadow: 'var(--shadow-xl)'
+                border: '3px solid var(--clubbee-gold-primary)',
+                boxShadow: '0 8px 20px rgba(212, 165, 116, 0.3)'
               }}
             />
           </div>
           
-          <h1 className="clubbee-text-gold" style={{ 
-            fontSize: '3.5rem', 
-            fontWeight: 'bold', 
+          <h1 className="heading-hero" style={{ 
             margin: 0,
-            textShadow: '3px 3px 6px rgba(0, 0, 0, 0.3)',
             position: 'relative',
             zIndex: 1
           }}>
             Welcome to CLUBBEE
           </h1>
           
-          <div style={{ 
-            fontSize: '1.5rem', 
-            color: 'var(--clubbee-gold-light)', 
+          <div className="subheading" style={{ 
             marginTop: 'var(--spacing-md)',
-            fontWeight: '600',
-            letterSpacing: '2px',
             position: 'relative',
-            zIndex: 1
+            zIndex: 1,
+            color: 'var(--brand-navy-primary)'
           }}>
             CONNECT • UNITE • ELEVATE
           </div>
           
           {user && (
-            <div style={{ 
+            <div className="body-text" style={{ 
               marginTop: 'var(--spacing-lg)',
-              fontSize: '1.2rem',
-              color: 'var(--clubbee-navy-primary)',
+              fontSize: '1.125rem',
               position: 'relative',
               zIndex: 1
             }}>
-              Hello, <span className="clubbee-text-gold" style={{ fontWeight: '700' }}>{user.displayName || 'Amazing Bee'}</span>! 🌟
+              Hello, <span style={{ 
+                fontWeight: '600', 
+                color: 'var(--brand-navy-primary)' 
+              }}>{user.displayName || 'Amazing Bee'}</span>! 🌟
             </div>
           )}
         </div>
 
         {user ? (
           <>
-            {/* 📊 Stats Honeycomb Grid */}
+            {/* 📊 Professional Stats Grid */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
               gap: 'var(--spacing-xl)',
-              marginBottom: 'var(--spacing-xl)'
+              marginBottom: 'var(--spacing-xxl)'
             }}>
               
               {/* Total Clubs Stat */}
-              <div className="honeycomb-card bee-animation" style={{
+              <div className="honeycomb-card bee-animation metric-card" style={{
                 textAlign: 'center',
-                background: 'linear-gradient(135deg, var(--clubbee-gold-primary), var(--clubbee-gold-bright))',
-                color: 'var(--clubbee-navy-primary)',
-                border: 'none'
+                background: '#F0F2F5',
+                color: '#333333',
+                border: '1px solid rgba(199, 160, 70, 0.2)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
               }}>
                 <div className="hexagon" style={{ 
                   width: '80px', 
                   height: '80px', 
                   margin: '0 auto var(--spacing-lg)',
-                  background: 'var(--clubbee-navy-primary)',
-                  color: 'var(--clubbee-gold-bright)',
-                  fontSize: '2rem'
+                  background: '#222C3B',
+                  color: '#C7A046',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%'
                 }}>
                   🏛️
                 </div>
@@ -142,33 +143,39 @@ const Dashboard = () => {
                   fontSize: '2.5rem', 
                   fontWeight: 'bold', 
                   margin: 0,
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+                  color: '#333333'
                 }}>
                   {clubs?.length || 0}
                 </h3>
                 <p style={{ 
                   fontSize: '1.1rem', 
                   fontWeight: '600', 
-                  marginTop: 'var(--spacing-sm)' 
+                  marginTop: 'var(--spacing-sm)',
+                  color: '#666666'
                 }}>
                   Total Clubs
                 </p>
               </div>
 
               {/* Your Clubs Stat */}
-              <div className="honeycomb-card bee-animation" style={{
+              <div className="honeycomb-card bee-animation metric-card" style={{
                 textAlign: 'center',
-                background: 'linear-gradient(135deg, var(--clubbee-navy-primary), var(--clubbee-navy-dark))',
-                color: 'var(--clubbee-gold-bright)',
-                border: 'none'
+                background: '#222C3B',
+                color: '#D0D0D0',
+                border: '1px solid rgba(199, 160, 70, 0.3)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)'
               }}>
                 <div className="hexagon" style={{ 
                   width: '80px', 
                   height: '80px', 
                   margin: '0 auto var(--spacing-lg)',
-                  background: 'var(--clubbee-gold-primary)',
-                  color: 'var(--clubbee-navy-primary)',
-                  fontSize: '2rem'
+                  background: '#C7A046',
+                  color: '#222C3B',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%'
                 }}>
                   💖
                 </div>
@@ -176,33 +183,39 @@ const Dashboard = () => {
                   fontSize: '2.5rem', 
                   fontWeight: 'bold', 
                   margin: 0,
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                  color: '#FFFFFF'
                 }}>
                   {userClubsCount}
                 </h3>
                 <p style={{ 
                   fontSize: '1.1rem', 
                   fontWeight: '600', 
-                  marginTop: 'var(--spacing-sm)' 
+                  marginTop: 'var(--spacing-sm)',
+                  color: '#D0D0D0'
                 }}>
                   Your Clubs
                 </p>
               </div>
 
               {/* Events Stat */}
-              <div className="honeycomb-card bee-animation" style={{
+              <div className="honeycomb-card bee-animation metric-card" style={{
                 textAlign: 'center',
-                background: 'linear-gradient(135deg, var(--clubbee-gold-primary), var(--clubbee-gold-bright))',
-                color: 'var(--clubbee-navy-primary)',
-                border: 'none'
+                background: '#F0F2F5',
+                color: '#333333',
+                border: '1px solid rgba(199, 160, 70, 0.2)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
               }}>
                 <div className="hexagon" style={{ 
                   width: '80px', 
                   height: '80px', 
                   margin: '0 auto var(--spacing-lg)',
-                  background: 'var(--clubbee-navy-primary)',
-                  color: 'var(--clubbee-gold-bright)',
-                  fontSize: '2rem'
+                  background: '#222C3B',
+                  color: '#C7A046',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%'
                 }}>
                   📅
                 </div>
@@ -210,33 +223,39 @@ const Dashboard = () => {
                   fontSize: '2.5rem', 
                   fontWeight: 'bold', 
                   margin: 0,
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+                  color: '#333333'
                 }}>
                   {userEventsCount}
                 </h3>
                 <p style={{ 
                   fontSize: '1.1rem', 
                   fontWeight: '600', 
-                  marginTop: 'var(--spacing-sm)' 
+                  marginTop: 'var(--spacing-sm)',
+                  color: '#666666'
                 }}>
                   Your Events
                 </p>
               </div>
 
               {/* Upcoming Events Stat */}
-              <div className="honeycomb-card bee-animation" style={{
+              <div className="honeycomb-card bee-animation metric-card" style={{
                 textAlign: 'center',
-                background: 'linear-gradient(135deg, var(--clubbee-navy-primary), var(--clubbee-navy-dark))',
-                color: 'var(--clubbee-gold-bright)',
-                border: 'none'
+                background: '#222C3B',
+                color: '#D0D0D0',
+                border: '1px solid rgba(199, 160, 70, 0.3)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)'
               }}>
                 <div className="hexagon" style={{ 
                   width: '80px', 
                   height: '80px', 
                   margin: '0 auto var(--spacing-lg)',
-                  background: 'var(--clubbee-gold-primary)',
-                  color: 'var(--clubbee-navy-primary)',
-                  fontSize: '2rem'
+                  background: '#C7A046',
+                  color: '#222C3B',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%'
                 }}>
                   🚀
                 </div>
@@ -244,14 +263,15 @@ const Dashboard = () => {
                   fontSize: '2.5rem', 
                   fontWeight: 'bold', 
                   margin: 0,
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                  color: '#FFFFFF'
                 }}>
                   {upcomingEvents}
                 </h3>
                 <p style={{ 
                   fontSize: '1.1rem', 
                   fontWeight: '600', 
-                  marginTop: 'var(--spacing-sm)' 
+                  marginTop: 'var(--spacing-sm)',
+                  color: '#D0D0D0'
                 }}>
                   Upcoming Events
                 </p>
@@ -259,16 +279,17 @@ const Dashboard = () => {
             </div>
 
             {/* 🎯 Quick Actions */}
-            <div className="honeycomb-card" style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(244, 196, 48, 0.05))',
-              border: '2px solid var(--clubbee-gold-primary)'
+            <div className="honeycomb-card quick-actions-container" style={{
+              background: '#222C3B',
+              border: '1px solid rgba(199, 160, 70, 0.3)',
+              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)'
             }}>
               <h2 className="clubbee-text-gold" style={{ 
                 fontSize: '2rem', 
                 fontWeight: 'bold', 
                 textAlign: 'center',
                 marginBottom: 'var(--spacing-xl)',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+                color: '#C7A046'
               }}>
                 🎯 Quick Actions
               </h2>
@@ -279,7 +300,7 @@ const Dashboard = () => {
                 gap: 'var(--spacing-lg)'
               }}>
                 <a href="/clubs" style={{ textDecoration: 'none' }}>
-                  <div className="btn-honey" style={{
+                  <div className="quick-action-button" style={{
                     width: '100%',
                     textAlign: 'center',
                     padding: 'var(--spacing-lg)',
@@ -287,22 +308,32 @@ const Dashboard = () => {
                     fontWeight: '600',
                     border: 'none',
                     cursor: 'pointer',
-                    display: 'block'
+                    display: 'block',
+                    background: '#C7A046',
+                    color: '#222C3B',
+                    borderRadius: '12px',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 12px rgba(199, 160, 70, 0.3)'
                   }}>
                     🏛️ Explore Clubs
                   </div>
                 </a>
                 
                 <a href="/events" style={{ textDecoration: 'none' }}>
-                  <div className="btn-navy" style={{
+                  <div className="quick-action-button" style={{
                     width: '100%',
                     textAlign: 'center',
                     padding: 'var(--spacing-lg)',
                     fontSize: '1.1rem',
                     fontWeight: '600',
-                    border: 'none',
+                    border: '1px solid rgba(199, 160, 70, 0.3)',
                     cursor: 'pointer',
-                    display: 'block'
+                    display: 'block',
+                    background: '#222C3B',
+                    color: '#D0D0D0',
+                    borderRadius: '12px',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
                   }}>
                     📅 Browse Events
                   </div>

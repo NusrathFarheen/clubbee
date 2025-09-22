@@ -23,24 +23,53 @@ const Events = () => {
   if (loading) {
     return (
       <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: '2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-          <img 
-            src="/clubbee-logo.jpg" 
-            alt="CLUBBEE" 
-            style={{ 
-              width: '80px', 
-              height: '80px', 
-              borderRadius: '12px', 
-              objectFit: 'cover',
-              border: '3px solid var(--clubbee-gold-primary)',
-              boxShadow: 'var(--shadow-md)',
-              marginBottom: '2rem'
-            }} 
-          />
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--clubbee-navy-primary)', marginBottom: '1rem' }}>
-            Campus Events
-          </h2>
-          <div className="loading-spinner">Loading events...</div>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: 'var(--spacing-xl)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            padding: 'var(--spacing-lg)',
+            borderRadius: 'var(--radius-lg)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(244, 196, 48, 0.2)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img 
+                src="/clubbee-logo.jpg" 
+                alt="CLUBBEE Logo"
+                style={{ 
+                  width: '60px', 
+                  height: '60px', 
+                  borderRadius: '12px',
+                  objectFit: 'cover',
+                  border: '3px solid var(--clubbee-gold-primary)',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              />
+              <div>
+                <h2 className="clubbee-text-gold" style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: 0,
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+                }}>
+                  📅 Campus Events
+                </h2>
+                <p style={{ 
+                  color: 'var(--clubbee-gold-light)', 
+                  margin: '0.5rem 0 0 0',
+                  fontSize: '1.1rem'
+                }}>
+                  Discover and participate in exciting events 🎉
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div className="loading-spinner">Loading events...</div>
+          </div>
         </div>
       </div>
     );
@@ -50,7 +79,17 @@ const Events = () => {
     <div className="honeycomb-bg" style={{ minHeight: '100vh', padding: '2rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          marginBottom: 'var(--spacing-xl)',
+          background: 'rgba(255, 255, 255, 0.1)',
+          padding: 'var(--spacing-lg)',
+          borderRadius: 'var(--radius-lg)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(244, 196, 48, 0.2)'
+        }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <img 
               src="/clubbee-logo.jpg" 
@@ -64,14 +103,32 @@ const Events = () => {
                 boxShadow: 'var(--shadow-md)'
               }}
             />
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--clubbee-navy-primary)' }}>
-              Campus Events
-            </h2>
+            <div>
+              <h2 className="clubbee-text-gold" style={{ 
+                fontSize: '2.5rem', 
+                fontWeight: 'bold', 
+                margin: 0,
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'
+              }}>
+                📅 Campus Events
+              </h2>
+              <p style={{ 
+                color: 'var(--clubbee-gold-light)', 
+                margin: '0.5rem 0 0 0',
+                fontSize: '1.1rem'
+              }}>
+                Discover and participate in exciting events 🎉
+              </p>
+            </div>
           </div>
           <button 
             onClick={() => setShowCreateModal(true)}
-            className="btn-honey"
-            style={{ fontSize: '1rem', padding: '0.75rem 1.5rem' }}
+            className="btn-honey pulse-honey"
+            style={{ 
+              fontSize: '1rem',
+              padding: 'var(--spacing-md) var(--spacing-xl)',
+              fontWeight: '600'
+            }}
           >
             + Create Event
           </button>
