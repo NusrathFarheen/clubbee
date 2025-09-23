@@ -9,7 +9,14 @@
   "scripts": {
     "start:backend": "npm start --workspace=backend",
     "start:frontend": "npm start --workspace=frontend",
+    "build:frontend": "npm run build --workspace=frontend",
     "install:backend": "npm install --workspace=backend",
-    "install:frontend": "npm install --workspace=frontend"
+    "install:frontend": "npm install --workspace=frontend",
+    "deploy:frontend": "cd frontend && npm run build",
+    "deploy:backend": "cd backend && npm install --production"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }

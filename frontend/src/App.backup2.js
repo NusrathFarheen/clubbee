@@ -8,40 +8,23 @@ import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import CreateClub from './pages/CreateClub';
 import FirebaseTest from './pages/FirebaseTest';
+import AdminPanel from './pages/AdminPanel';
 import { AuthProvider, useAuth } from './hooks/useAuth';
-import { NotificationProvider } from './contexts/NotificationContext';
-import { ActivityProvider } from './contexts/ActivityContext';
-import NotificationBell from './components/NotificationBell';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import './App.css';
+import './test-firebase'; // Import Firebase test for console access
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <NotificationProvider>
-          <ActivityProvider>
-            <AppContent />
-          </ActivityProvider>
-        </NotificationProvider>
+        <AppContent />
       </AuthProvider>
     </Router>
   );
 }
 
-// Protected Route Component - now inside AuthProvider context
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  
-  if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
-  }
-  
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-  
-  return children;
-};
+// Using imported ProtectedRoute component now
 
 function AppContent() {
   const { user, logOut } = useAuth();
@@ -200,6 +183,29 @@ function AppContent() {
                 👤 Profile
               </Link>
               <Link 
+                to="/admin" 
+                className="nav-link"
+                style={{ 
+                  color: 'var(--clubbee-gold-primary)', 
+                  textDecoration: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: 'var(--radius-md)',
+                  transition: 'var(--transition-normal)',
+                  fontWeight: '600',
+                  border: '1px solid var(--clubbee-gold-primary)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'var(--clubbee-gold-primary)';
+                  e.target.style.color = 'var(--clubbee-navy-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent';
+                  e.target.style.color = 'var(--clubbee-gold-primary)';
+                }}
+              >
+                ⚙️ Admin
+              </Link>
+              <Link 
                 to="/firebase-test" 
                 className="nav-link"
                 style={{ 
@@ -222,10 +228,7 @@ function AppContent() {
                 🔧 Debug
               </Link>
               
-              {/* � Notification Bell */}
-              <NotificationBell />
-              
-              {/* �👤 User Profile Section */}
+              {/* 👤 User Profile Section */}
               <div style={{ 
                 marginLeft: '2rem', 
                 display: 'flex', 
@@ -294,6 +297,11 @@ function AppContent() {
           <Route path="/create-club" element={
             <ProtectedRoute>
               <CreateClub />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminPanel />
             </ProtectedRoute>
           } />
           <Route path="/firebase-test" element={

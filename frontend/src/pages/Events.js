@@ -251,6 +251,7 @@ const Events = () => {
                   <RSVPButton 
                     eventId={event._id} 
                     attendees={Array.isArray(event.attendees) ? event.attendees : []}
+                    eventTitle={event.title}
                   />
                 </div>
               </div>

@@ -6,8 +6,20 @@ const connectDB = require('./config/db');
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Enable CORS for all origins
-app.use(cors());
+// Configure CORS for production and development
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? [
+        'https://clubbee-frontend.vercel.app',
+        'https://clubbee.vercel.app',
+        process.env.FRONTEND_URL
+      ].filter(Boolean)
+    : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

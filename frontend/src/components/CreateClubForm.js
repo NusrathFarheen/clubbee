@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useNotificationTriggers } from '../hooks/useNotificationTriggers';
+import { useActivityTriggers } from '../hooks/useActivityTriggers';
 
 const CreateClubForm = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { triggerClubJoined, triggerGeneral } = useNotificationTriggers();
+  const { triggerClubCreate } = useActivityTriggers();
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -48,6 +52,17 @@ const CreateClubForm = () => {
       }
       
       setSuccess(true);
+      
+      // Trigger notification for successful club creation
+      triggerGeneral(
+        'Club Created Successfully!',
+        `${formData.name} has been created and is now live. Start inviting members!`,
+        '/clubs'
+      );
+
+      // Trigger activity tracking
+      triggerClubCreate(formData.name);
+      
       // Reset form after successful submission
       setFormData({
         name: '',

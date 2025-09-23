@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useEvents } from '../hooks/useApi';
+import { useActivityTriggers } from '../hooks/useActivityTriggers';
 import { toast } from 'react-hot-toast';
 
-const RSVPButton = ({ eventId, attendees = [] }) => {
+const RSVPButton = ({ eventId, attendees = [], eventTitle }) => {
   const { user } = useAuth();
   const { rsvpToEvent, cancelRSVP } = useEvents();
+  const { triggerEventRSVP } = useActivityTriggers();
   const [isRSVPed, setIsRSVPed] = useState(false);
   const [loading, setLoading] = useState(false);
   
@@ -45,6 +47,10 @@ const RSVPButton = ({ eventId, attendees = [] }) => {
         await rsvpToEvent(eventId, user.uid, user.displayName || user.email);
         setIsRSVPed(true);
         toast.success('RSVP successful! See you at the event!');
+        // Trigger activity tracking for RSVP
+        if (eventTitle) {
+          triggerEventRSVP(eventTitle);
+        }
       }
     } catch (err) {
       toast.error(err.message || 'Failed to update RSVP status');

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useActivityTriggers } from '../hooks/useActivityTriggers';
 import ImageUpload from '../components/ImageUpload';
 import { eventsService } from '../services/firebaseService';
 
 const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
   const { user } = useAuth();
+  const { triggerEventCreate } = useActivityTriggers();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -51,6 +53,9 @@ const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
       });
       
       console.log('Event created successfully in Firestore:', newEvent);
+      
+      // Trigger activity tracking
+      triggerEventCreate(eventData.title);
       
       // Call the callback to update the events list
       onEventCreated(newEvent);

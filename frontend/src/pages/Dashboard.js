@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useClubs, useEvents } from '../hooks/useApi';
+import ActivityTracker from '../components/ActivityTracker';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -339,6 +340,11 @@ const Dashboard = () => {
                   </div>
                 </a>
               </div>
+            </div>
+
+            {/* 📈 Activity Tracker */}
+            <div style={{ marginTop: 'var(--spacing-xxl)' }}>
+              <ActivityTracker />
             </div>
           </>
         ) : (
